@@ -1,0 +1,265 @@
+// src/lib/demo/seed.ts
+import type { DemoStore } from "@/lib/demo/types";
+
+const now = () => new Date().toISOString();
+
+export function createSeedStore(): DemoStore {
+  const faculties = [
+    {
+      id: "fac-info",
+      name: "Informatique",
+      code: "INFO",
+      isActive: true,
+    },
+    {
+      id: "fac-gest",
+      name: "Gestion",
+      code: "GEST",
+      isActive: true,
+    },
+    {
+      id: "fac-droit",
+      name: "Droit",
+      code: "DROIT",
+      isActive: true,
+    },
+  ];
+
+  const levels = [
+    { id: "lvl-l1", name: "Licence 1", sortOrder: 1, isActive: true },
+    { id: "lvl-l2", name: "Licence 2", sortOrder: 2, isActive: true },
+    { id: "lvl-l3", name: "Licence 3", sortOrder: 3, isActive: true },
+    { id: "lvl-m1", name: "Master 1", sortOrder: 4, isActive: true },
+  ];
+
+  const modules = [
+    {
+      id: "mod-alg",
+      facultyId: "fac-info",
+      levelId: "lvl-l1",
+      name: "Algorithmique",
+      code: "INFO-L1-ALG",
+      description: "Bases de l'algorithmique",
+      isActive: true,
+    },
+    {
+      id: "mod-prog",
+      facultyId: "fac-info",
+      levelId: "lvl-l1",
+      name: "Introduction à la programmation",
+      code: "INFO-L1-PROG",
+      description: null,
+      isActive: true,
+    },
+    {
+      id: "mod-bdd",
+      facultyId: "fac-info",
+      levelId: "lvl-l2",
+      name: "Bases de données",
+      code: "INFO-L2-BDD",
+      description: null,
+      isActive: true,
+    },
+    {
+      id: "mod-poo",
+      facultyId: "fac-info",
+      levelId: "lvl-l2",
+      name: "Programmation orientée objet",
+      code: "INFO-L2-POO",
+      description: null,
+      isActive: true,
+    },
+    {
+      id: "mod-gl",
+      facultyId: "fac-info",
+      levelId: "lvl-l3",
+      name: "Génie logiciel",
+      code: "INFO-L3-GL",
+      description: null,
+      isActive: true,
+    },
+    {
+      id: "mod-compta",
+      facultyId: "fac-gest",
+      levelId: "lvl-l1",
+      name: "Comptabilité générale",
+      code: "GEST-L1-COMPTA",
+      description: null,
+      isActive: true,
+    },
+    {
+      id: "mod-droit",
+      facultyId: "fac-droit",
+      levelId: "lvl-l1",
+      name: "Introduction au droit",
+      code: "DROIT-L1-INTRO",
+      description: null,
+      isActive: true,
+    },
+  ];
+
+  const users = [
+    {
+      id: "user-admin",
+      firstName: "Afi",
+      lastName: "Admin",
+      email: "admin@campus.tg",
+      phone: "90000000",
+      studentNumber: null,
+      facultyId: null,
+      levelId: null,
+      accountStatus: "active" as const,
+      role: "admin" as const,
+      password: "demo1234",
+    },
+    {
+      id: "user-alice",
+      firstName: "Alice",
+      lastName: "Koffi",
+      email: "alice@etudiant.tg",
+      phone: "90111111",
+      studentNumber: "ETU-1001",
+      facultyId: "fac-info",
+      levelId: "lvl-l1",
+      accountStatus: "active" as const,
+      role: "student" as const,
+      password: "demo1234",
+    },
+    {
+      id: "user-bruno",
+      firstName: "Bruno",
+      lastName: "Mensah",
+      email: "bruno@etudiant.tg",
+      phone: "90222222",
+      studentNumber: "ETU-1002",
+      facultyId: "fac-info",
+      levelId: "lvl-l3",
+      accountStatus: "active" as const,
+      role: "student" as const,
+      password: "demo1234",
+    },
+    {
+      id: "user-claire",
+      firstName: "Claire",
+      lastName: "Agbe",
+      email: "claire@etudiant.tg",
+      phone: "90333333",
+      studentNumber: "ETU-1003",
+      facultyId: "fac-gest",
+      levelId: "lvl-l2",
+      accountStatus: "active" as const,
+      role: "student" as const,
+      password: "demo1234",
+    },
+  ];
+
+  const tutorProfiles = [
+    {
+      id: "tutor-bruno",
+      userId: "user-bruno",
+      status: "approved" as const,
+      payoutPhone: "90222222",
+      payoutProvider: "TMONEY",
+      bio: "L3 Informatique — aide en algo, POO et BDD.",
+      approvedAt: now(),
+    },
+    {
+      id: "tutor-claire",
+      userId: "user-claire",
+      status: "pending" as const,
+      payoutPhone: "90333333",
+      payoutProvider: "MOOV",
+      bio: "Souhaite aider en comptabilité.",
+      approvedAt: null,
+    },
+  ];
+
+  const requests = [
+    {
+      id: "req-1",
+      requesterId: "user-alice",
+      facultyId: "fac-info",
+      levelId: "lvl-l1",
+      moduleId: "mod-alg",
+      moduleNameSnapshot: "Algorithmique",
+      description:
+        "Je bloque sur les boucles et la complexité algorithmique pour mon TD.",
+      preferredMode: "online" as const,
+      preferredDate: new Date(Date.now() + 86400000 * 2).toISOString(),
+      preferredDurationMinutes: 60,
+      budgetAmount: 3000,
+      status: "open" as const,
+      createdAt: now(),
+      expiresAt: null,
+    },
+    {
+      id: "req-2",
+      requesterId: "user-alice",
+      facultyId: "fac-info",
+      levelId: "lvl-l2",
+      moduleId: "mod-bdd",
+      moduleNameSnapshot: "Bases de données",
+      description: "Besoin d'aide pour les jointures SQL et la normalisation.",
+      preferredMode: "in_person" as const,
+      preferredDate: new Date(Date.now() + 86400000 * 4).toISOString(),
+      preferredDurationMinutes: 90,
+      budgetAmount: 5000,
+      status: "open" as const,
+      createdAt: now(),
+      expiresAt: null,
+    },
+  ];
+
+  return {
+    users,
+    tutorProfiles,
+    faculties,
+    levels,
+    modules,
+    requests,
+    proposals: [],
+    bookings: [],
+    payments: [],
+    wallets: [
+      {
+        tutorId: "tutor-bruno",
+        pendingBalance: 0,
+        availableBalance: 0,
+        totalEarned: 0,
+        totalPaidOut: 0,
+      },
+      {
+        tutorId: "tutor-claire",
+        pendingBalance: 0,
+        availableBalance: 0,
+        totalEarned: 0,
+        totalPaidOut: 0,
+      },
+    ],
+    notifications: [
+      {
+        id: "notif-1",
+        userId: "user-alice",
+        title: "Bienvenue",
+        message: "Ton espace étudiant est prêt. Publie une demande d'aide.",
+        type: "welcome",
+        relatedEntityType: null,
+        relatedEntityId: null,
+        readAt: null,
+        createdAt: now(),
+      },
+      {
+        id: "notif-2",
+        userId: "user-bruno",
+        title: "Profil aidant validé",
+        message: "Tu peux consulter et répondre aux demandes ouvertes.",
+        type: "tutor_approved",
+        relatedEntityType: "tutor_profile",
+        relatedEntityId: "tutor-bruno",
+        readAt: null,
+        createdAt: now(),
+      },
+    ],
+    withdrawals: [],
+  };
+}
