@@ -24,9 +24,17 @@ export function proxy(request: NextRequest) {
   }
 
   if (session && isAuthRoute) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/student/dashboard";
-    return NextResponse.redirect(url);
+    try {
+      const payload = JSON.parse(session) as { role?: string };
+      const url = request.nextUrl.clone();
+      url.pathname =
+        payload.role === "admin" ? "/admin/dashboard" : "/student/dashboard";
+      return NextResponse.redirect(url);
+    } catch {
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      return NextResponse.redirect(url);
+    }
   }
 
   if (session && pathname.startsWith("/admin")) {

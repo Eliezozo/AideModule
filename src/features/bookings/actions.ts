@@ -9,7 +9,7 @@ import {
 } from "@/lib/demo/business";
 import { requireUser } from "@/lib/demo/session";
 
-export async function confirmSessionAction(bookingId: string) {
+export async function confirmSessionAction(bookingId: string): Promise<void> {
   const user = await requireUser();
   try {
     confirmSessionCompletion({ userId: user.id, bookingId });
@@ -19,12 +19,12 @@ export async function confirmSessionAction(bookingId: string) {
     revalidatePath("/admin/bookings");
     revalidatePath("/admin/finance");
   } catch (error) {
-    if (error instanceof BusinessError) return { error: error.message };
+    if (error instanceof BusinessError) throw new Error(error.message);
     throw error;
   }
 }
 
-export async function disputeBookingAction(bookingId: string) {
+export async function disputeBookingAction(bookingId: string): Promise<void> {
   const user = await requireUser();
   try {
     disputeBooking({ userId: user.id, bookingId });
@@ -32,7 +32,7 @@ export async function disputeBookingAction(bookingId: string) {
     revalidatePath("/tutor/sessions");
     revalidatePath("/admin/bookings");
   } catch (error) {
-    if (error instanceof BusinessError) return { error: error.message };
+    if (error instanceof BusinessError) throw new Error(error.message);
     throw error;
   }
 }

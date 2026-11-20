@@ -17,7 +17,7 @@ const demos = [
   { email: "alice@etudiant.tg", label: "Alice (demandeur)" },
   { email: "bruno@etudiant.tg", label: "Bruno (aidant validé)" },
   { email: "claire@etudiant.tg", label: "Claire (aidant en attente)" },
-  { email: "admin@campus.tg", label: "Admin" },
+  { email: "admin@campus.tg", label: "Admin — ouvrir l’administration" },
 ];
 
 export function LoginForm() {

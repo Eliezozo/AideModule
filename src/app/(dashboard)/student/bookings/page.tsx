@@ -59,8 +59,8 @@ export default async function StudentBookingsPage() {
                     <StatusBadge status={booking.mode} />
                   </p>
                   <p className="mt-2 text-sm">
-                    Total {formatXof(booking.totalAmount)} · Commission{" "}
-                    {formatXof(booking.platformCommissionAmount)} · Aidant{" "}
+                    Total {formatXof(booking.totalAmount)} · Part plateforme{" "}
+                    {formatXof(booking.platformCommissionAmount)} · Montant dû aidant{" "}
                     {formatXof(booking.tutorDueAmount)}
                   </p>
                   <p className="mt-1 text-xs text-slate-500">

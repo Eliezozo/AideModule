@@ -29,5 +29,18 @@ const labels: Record<string, string> = {
 };
 
 export function StatusBadge({ status }: { status: string }) {
-  return <Badge variant="secondary">{labels[status] ?? status}</Badge>;
+  const tone =
+    status === "approved" || status === "completed" || status === "paid" || status === "active"
+      ? "border-emerald-200 bg-emerald-50 text-emerald-800"
+      : status === "pending" || status === "pending_payment" || status === "awaiting_completion"
+        ? "border-amber-200 bg-amber-50 text-amber-800"
+        : status === "rejected" || status === "cancelled" || status === "failed" || status === "suspended" || status === "disputed"
+          ? "border-rose-200 bg-rose-50 text-rose-800"
+          : status === "online"
+            ? "border-sky-200 bg-sky-50 text-sky-800"
+            : status === "in_person"
+              ? "border-violet-200 bg-violet-50 text-violet-800"
+              : "border-slate-200 bg-slate-50 text-slate-700";
+
+  return <Badge variant="outline" className={tone}>{labels[status] ?? status}</Badge>;
 }

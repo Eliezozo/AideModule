@@ -94,10 +94,10 @@ export async function logoutAction() {
   redirect("/login");
 }
 
-export async function quickLoginAction(email: string) {
+export async function quickLoginAction(email: string): Promise<void> {
   const user = getStore().users.find((u) => u.email === email);
   if (!user) {
-    return { error: "Compte démo introuvable." };
+    throw new Error("Compte démo introuvable.");
   }
   await setDemoSession({ userId: user.id, role: user.role });
   if (user.role === "admin") redirect("/admin/dashboard");

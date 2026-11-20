@@ -118,9 +118,7 @@ export async function acceptProposalAction(proposalId: string) {
     revalidatePath("/student/bookings");
     revalidatePath("/tutor/sessions");
   } catch (error) {
-    if (error instanceof BusinessError) {
-      return { error: error.message };
-    }
+    if (error instanceof BusinessError) throw new Error(error.message);
     throw error;
   }
 }
@@ -136,9 +134,7 @@ export async function rejectProposalAction(proposalId: string) {
     revalidatePath("/student/proposals");
     revalidatePath("/tutor/proposals");
   } catch (error) {
-    if (error instanceof BusinessError) {
-      return { error: error.message };
-    }
+    if (error instanceof BusinessError) throw new Error(error.message);
     throw error;
   }
 }
